@@ -1,10 +1,17 @@
+import { ContactListComponent } from './contact/contact-list.component';
+import { AppModule } from './app.module';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  template: `
+   <app-contact-list></app-contact-list>
+  `
 })
 export class AppComponent {
-  title = 'app works!';
+  public selectedContact = {};
+
+  onSelect(contact) {
+    this.selectedContact = contact;
+  }
 }
