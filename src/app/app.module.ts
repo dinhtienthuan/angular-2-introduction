@@ -8,21 +8,24 @@ import { AppComponent } from './app.component';
 import { ContactListComponent } from './contact/contact-list.component';
 import { ContactComponent } from './contact/contact.component';
 
-import { routing } from './app.routing';
+import { NewContactComponent } from './contact/new-contact.component';
+import {AppRoutingModule} from "./app.routing";
+import {ContactService} from "./contact/contact.service";
 
 @NgModule({
   declarations: [
     AppComponent,
     ContactListComponent,
-    ContactComponent
+    ContactComponent,
+    NewContactComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    routing
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [ContactService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
