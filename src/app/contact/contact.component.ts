@@ -19,6 +19,7 @@ import { Component, OnInit, Input } from '@angular/core';
       <label for="email">Email:</label>
       <input type="text" id="email" [(ngModel)]="contact.email">
     </div>
+    <button>Create new contact from this contact</button>
   `,
   styles: [`
     label {
