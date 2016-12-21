@@ -13,7 +13,7 @@ import { Contact } from './contact';
         {{contact.firstName}} {{contact.lastName}}
       </li>
     </ul>
-    <app-contact [contact]="selectedContact"></app-contact>
+    <app-contact *ngIf="selectedContact !== null" [contact]="selectedContact"></app-contact>
   `,
   styleUrls: ['./contact-list.component.css'],
   providers: [ContactService]
@@ -28,7 +28,7 @@ export class ContactListComponent implements OnInit {
 
   public contacts: Contact[];
 
-  public selectedContact = {};
+  public selectedContact: Contact = null;
 
   onSelect(contact) {
     this.selectedContact = contact;
