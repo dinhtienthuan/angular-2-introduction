@@ -1,28 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import {ContactService} from "./contact.service";
 import {Contact} from "./contact";
-import {Router, ActivatedRoute, Params, UrlSegment, Data} from "@angular/router";
+import {Router, ActivatedRoute, Params} from "@angular/router";
 
 @Component({
   selector: 'app-new-contact',
   template: `
-    <div>
-      <label for="firstName">First Name:</label>
-      <input type="text" id="firstName" #firstName value="{{ passedFirstName }}">
-    </div>
-    <div>
-      <label for="lastName">Last Name:</label>
-      <input type="text" id="lastName" #lastName value="{{ passedLastName }}">
-    </div>
-    <div>
-      <label for="phone">Phone Number:</label>
-      <input type="text" id="phone" #phone>
-    </div>
-    <div>
-      <label for="email">Email:</label>
-      <input type="text" id="email" #email>
-    </div>
-    <button (click)="onAddContact(firstName.value, lastName.value, phone.value, email.value)">Create Contact</button>
+    <form #contactForm="ngForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" [(ngModel)]="newContact.firstName" required>
+      </div>
+      <div>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" [(ngModel)]="newContact.lastName" required>
+      </div>
+      <div>
+        <label for="phone">Phone Number:</label>
+        <input type="text" id="phone" name="phone" [(ngModel)]="newContact.phone" required>
+      </div>
+      <div>
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" [(ngModel)]="newContact.email" required>
+      </div>
+      <button type="submit">Create Contact</button>
+    </form>
   `,
   styles: [`
     label {
@@ -33,18 +35,21 @@ import {Router, ActivatedRoute, Params, UrlSegment, Data} from "@angular/router"
     input {
       width: 250px;
     }
+    
+    input.ng-invalid {
+      border: 1px solid red;
+    }
   `]
 })
 export class NewContactComponent implements OnInit {
-  public passedFirstName: string = '';
-  public passedLastName: string = '';
+  newContact: Contact = {};
 
   constructor(private contactService: ContactService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
    this.activatedRoute.queryParams.subscribe((params: Params) => {
-     this.passedFirstName = params['firstName'];
-     this.passedLastName = params['lastName'];
+     this.newContact.firstName = params['firstName'];
+     this.newContact.lastName = params['lastName'];
    });
   }
 
@@ -53,5 +58,9 @@ export class NewContactComponent implements OnInit {
     this.contactService.insertContact(contact);
     this.router.navigate(['/contacts'])
       .catch(error => console.log(error));
+  }
+
+  onSubmit() {
+
   }
 }
