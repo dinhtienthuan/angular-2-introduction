@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {Router, NavigationExtras} from "@angular/router";
+import {Contact} from "./contact";
 
 @Component({
   selector: 'app-contact',
@@ -19,7 +21,7 @@ import { Component, OnInit, Input } from '@angular/core';
       <label for="email">Email:</label>
       <input type="text" id="email" [(ngModel)]="contact.email">
     </div>
-    <button>Create new contact from this contact</button>
+    <button (click)="onCreateNew()">Create new contact from this contact</button>
   `,
   styles: [`
     label {
@@ -33,11 +35,21 @@ import { Component, OnInit, Input } from '@angular/core';
   `]
 })
 export class ContactComponent implements OnInit {
-  @Input() public contact = {};
+  @Input() public contact: Contact = null;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
+  onCreateNew() {
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        firstName: this.contact.firstName,
+        lastName: this.contact.lastName
+      }
+    };
+    this.router.navigate(['/new-contacts'], navigationExtras)
+      .catch(error => console.log(error));
+  }
 }
