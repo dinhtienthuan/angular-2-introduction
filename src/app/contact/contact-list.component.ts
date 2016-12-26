@@ -10,7 +10,7 @@ import { Contact } from './contact';
         *ngFor="let contact of contacts"
         (click)="onSelect(contact)"
         [class.clicked]="selectedContact === contact">
-        {{contact.firstName}} {{contact.lastName}}
+        {{contact.firstName}} {{contact.lastName | uppercase}}
       </li>
     </ul>
     <app-contact *ngIf="selectedContact !== null" [contact]="selectedContact"></app-contact>
