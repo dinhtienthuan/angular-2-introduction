@@ -11,13 +11,16 @@ import { ContactComponent } from './contact/contact.component';
 import { NewContactComponent } from './contact/new-contact.component';
 import {AppRoutingModule} from "./app.routing";
 import {ContactService} from "./contact/contact.service";
+import { HttpTestComponent } from './http-test/http-test.component';
+import {HttpTestService} from "./http-test/http-test.service";
 
 @NgModule({
   declarations: [
     AppComponent,
     ContactListComponent,
     ContactComponent,
-    NewContactComponent
+    NewContactComponent,
+    HttpTestComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,7 @@ import {ContactService} from "./contact/contact.service";
     HttpModule,
     AppRoutingModule
   ],
-  providers: [ContactService],
+  providers: [ContactService, HttpTestService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

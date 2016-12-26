@@ -11,6 +11,7 @@ import { Component } from '@angular/core';
     </header>
     <div class="main">
       <router-outlet></router-outlet>
+      <app-http-test></app-http-test>
     </div>
   `
 })
