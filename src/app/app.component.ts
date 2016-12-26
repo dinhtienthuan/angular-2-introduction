@@ -5,15 +5,14 @@ import { Component } from '@angular/core';
   template: `
     <div class="parent">
     <h1>Parent</h1>
-    <p>Value entered in child component: </p>
+    <p>Value entered in child component: {{childValue}}</p>
     <input type="text" #parentInput (keyup)="0"><br>
-    <button>Click me</button>
     <div class="child">
-      <child [parentValue]="parentInput.value"></child>
+      <app-child [parentValue]="parentInput.value" (childChanged)="childValue = $event"></app-child>
     </div>
   </div>
   `
 })
 export class AppComponent {
-
+  childValue: string;
 }
