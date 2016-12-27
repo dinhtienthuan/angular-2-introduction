@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
     <p>Value entered in child component: {{childValue}}</p>
     <input type="text" #parentInput (keyup)="0"><br>
     <div class="child">
-      <app-child [parentValue]="parentInput.value" (childChanged)="childValue = $event"></app-child>
+      <app-child [parentValue]="parentInput.value" (childChanged)="childValue = $event.prefix + ' ' + $event.value"></app-child>
     </div>
   </div>
   `
